@@ -4,7 +4,7 @@ const cors =require('cors')
 require('dotenv').config()
 const { MongoClient, ServerApiVersion } = require('mongodb');
  
-const port = process.env.PORT || 6000
+const port = process.env.PORT || 5000
 app.use(cors())
  
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.o13hs.mongodb.net/?retryWrites=true&w=majority`;
@@ -24,7 +24,11 @@ const shopDataCollection = database.collection("shopData");
 app.get('/shopData',async(req,res)=>{
   const curser = shopDataCollection.find({});
   const data = await curser.toArray();
-  res.send(data);
+  const count = await curser.count();
+  res.send({
+    count,
+    data
+  });
 })
 
 }
