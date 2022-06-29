@@ -23,8 +23,8 @@ const shopDataCollection = database.collection("shopData");
 // shop data
 app.get('/shopData',async(req,res)=>{
   const curser = shopDataCollection.find({});
-  const data = await curser.toArray();
-  res.send(data);
+  const shopData = await curser.toArray();
+  res.send(shopData);
 })
 
 }
